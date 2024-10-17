@@ -8,15 +8,23 @@ import 'package:flutter_stripe_demo/constants.dart';
 /// Don't you dare do it in real apps!
 class Server {
   Future<String> createCheckout() async {
-    final auth = 'Basic ' + base64Encode(utf8.encode('$secretKey:'));
+    final auth = 'Bearer $secretKey';
     final body = {
-      'payment_method_types': ['card'],
-      'line_items': [
-        {
-          'price': nikesPriceId,
-          'quantity': 1,
-        }
-      ],
+      //'payment_method_types[]': 'card',
+       'line_items': [
+         {
+           'price_data':
+           {
+             'currency': 'usd',
+             'unit_amount': 100,
+             'product_data':{
+               'name': 'testtovar',
+               'description': 'description',
+             }
+           },
+           'quantity': 1,
+         }
+       ],
       'mode': 'payment',
       'success_url': 'http://localhost:8080/#/success',
       'cancel_url': 'http://localhost:8080/#/cancel',

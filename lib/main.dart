@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: RaisedButton(
+        child: MaterialButton(
           onPressed: () => redirectToCheckout(context),
           child: Text('Stripe Checkout in Flutter!'),
         ),
@@ -42,7 +42,6 @@ class SuccessPage extends StatelessWidget {
       body: Center(
         child: Text(
           'Success',
-          style: Theme.of(context).textTheme.headline1,
         ),
       ),
     );

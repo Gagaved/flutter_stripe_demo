@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe_demo/constants.dart';
 import 'package:js/js.dart';
 
+import 'server_stub.dart';
+
 void redirectToCheckout(BuildContext _) async {
   final stripe = Stripe(apiKey);
+  final id = await Server().createCheckout();
   stripe.redirectToCheckout(CheckoutOptions(
-    lineItems: [
-      LineItem(price: nikesPriceId, quantity: 1),
-    ],
-    mode: 'payment',
-    successUrl: 'http://localhost:8080/#/success',
-    cancelUrl: 'http://localhost:8080/#/cancel',
-  ));
+    sessionId: id,
+    ));
 }
 
 @JS()
